@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>卑微的光</title>
+  <meta name="description" content="一页极简诗：卑微的光。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <style>
+    html,body{height:100%;margin:0;}
+    @keyframes glow {
+      0%,100% {background: radial-gradient(ellipse at bottom, rgba(30,70,150,0.95) 0%, rgba(10,20,40,1) 100%); box-shadow:inset 0 -80px 100px rgba(255,255,255,0.08);} 
+      50% {background: radial-gradient(ellipse at bottom, rgba(45,90,180,1) 0%, rgba(10,20,40,1) 100%); box-shadow:inset 0 -100px 140px rgba(255,255,255,0.15);} 
+    }
+    @keyframes fadein { from {opacity:0; transform: translateY(10px);} to {opacity:1; transform: translateY(0);} }
+    body{
+      animation: glow 12s ease-in-out infinite;
+      color:#e9ecf5;
+      font-family:'Noto Serif SC','ZCOOL XiaoWei',serif;
+      line-height:1.9;letter-spacing:.03em;
+      display:flex;justify-content:center;align-items:flex-start;
+      padding:8vh 1rem 10vh;
+    }
+    main{max-width:760px; animation: fadein 3s ease-in-out forwards;}
+    h1{font-size:clamp(1.6rem,2.5vw+1rem,2.4rem);margin:0 0 .5rem 0;font-weight:600;color:#fff;text-shadow:0 0 8px rgba(255,255,255,0.3);opacity:0;animation: fadein 3s ease-in-out forwards;animation-delay:.5s;}
+    .subtitle{color:#aab2cc;font-size:.95rem;margin-bottom:2.5rem;opacity:0;animation:fadein 3s ease-in-out forwards;animation-delay:1s;}
+    .poem{white-space:pre-wrap;font-size:clamp(1.05rem,1.2vw+.8rem,1.2rem);opacity:0;animation:fadein 4s ease-in-out forwards;animation-delay:1.5s;}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);margin:1.8rem 0;opacity:0;animation:fadein 4s ease-in-out forwards;animation-delay:3.5s;}
+    footer{color:#aab2cc;font-size:.9rem;display:flex;gap:.8rem;opacity:0;animation:fadein 4s ease-in-out forwards;animation-delay:4.5s;}
+    .badge{border:1px solid currentColor;border-radius:999px;padding:.2rem .6rem;opacity:.7;}
+
+    .music-toggle{
+      position:fixed; right:1rem; bottom:1rem; 
+      background: rgba(255,255,255,.08);
+      color:#e9ecf5; border:1px solid rgba(255,255,255,.25);
+      backdrop-filter: blur(6px);
+      padding:.55rem .9rem; border-radius:999px; 
+      font-size:.9rem; line-height:1; cursor:pointer;
+      display:flex; align-items:center; gap:.45rem;
+      transition: all .25s ease; opacity:.9;
+    }
+    .music-toggle:hover{ background:rgba(255,255,255,.14); opacity:1; }
+    .music-toggle .dot{ width:.45rem; height:.45rem; border-radius:50%; background:#22d3ee; box-shadow:0 0 10px #22d3ee; }
+    .music-toggle.paused .dot{ background:#94a3b8; box-shadow:none; }
+
+    audio{ display:none; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>卑微的光</h1>
+      <div class="subtitle">— 一页极简诗</div>
+    </header>
+    <section class="poem">
+风经过我，
+什么也没带走。
+
+我仍在原处，
+低一点，
+再低一点，
+直到心底的光
+能照见自己。
+
+世界太大声了，
+我不必回应。
+
+热闹在远处喧哗，
+像潮水
+拍着一座空城。
+
+我愿做被忽略的一片叶，
+在风里转身，
+不求方向。
+
+爱你不必说出口，
+因为它早已在心里。
+
+一切高处都在坠落。
+
+不问意义，
+
+只听见——
+
+光，
+从沉默里亮起。
+    </section>
+    <div class="divider"></div>
+    <footer>
+      <span class="badge">留白</span>
+      <span class="badge">静默</span>
+      <span class="badge">微光</span>
+    </footer>
+  </main>
+
+  <audio id="bgm" preload="auto" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/14/audio_3a62161d68.mp3?filename=soft-piano-ambient-110153.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-toggle paused" id="musicBtn" aria-pressed="false" aria-label="播放或暂停音乐">
+    <span class="dot" aria-hidden="true"></span>
+    <span id="musicText">播放音乐</span>
+  </button>
+
+  <script>
+    (function(){
+      const audio = document.getElementById('bgm');
+      const btn = document.getElementById('musicBtn');
+      const txt = document.getElementById('musicText');
+
+      function play(){ audio.play().then(()=>{
+        btn.classList.remove('paused');
+        btn.setAttribute('aria-pressed','true');
+        txt.textContent = '暂停音乐';
+      }).catch(()=>{}); }
+
+      try{ audio.volume = 0.5; play(); }catch(e){}
+
+      btn.addEventListener('click', ()=>{
+        if(audio.paused){ play(); }
+        else{ audio.pause(); btn.classList.add('paused'); btn.setAttribute('aria-pressed','false'); txt.textContent = '播放音乐'; }
+      });
+
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        document.body.style.animation = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>

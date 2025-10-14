@@ -17,7 +17,7 @@ A minimalist blue night poem with ambient piano, where light grows from silence.
 
 
 **Live page:**  
-[🌙 View “Light of Humility”](https://f2fang.github.io/ff-light-and-whisper/light-of-humility.html)
+[🌙 View “Light of Humility”](https://f2fang.github.io/FF-Light-and-Whisper/light-of-humility.html)
 
 ---
 

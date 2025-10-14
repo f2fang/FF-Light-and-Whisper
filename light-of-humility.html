@@ -2,153 +2,127 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>卑微的光</title>
-  <meta name="description" content="FF · Light and Whisper — A poetic dreamscape of quiet light and whispers. 一处诗与梦的空间。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Light of Humility | 光之谦卑</title>
+  <meta name="description" content="FF · Light and Whisper · Light of Humility" />
   <style>
-    html,body{height:100%;margin:0}
+    :root{
+      --bg:#0b0f1a;
+      --fg:#eaeef7;
+      --muted:#a9b3c7;
+      --accent:#9fd1ff;
+      --card:#121827;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      /* 单一深蓝底色 */
-      background:#0b1b3a;
-      color:#e9ecf5;
-      font-family:'Noto Serif SC','ZCOOL XiaoWei',serif;
-      line-height:1.9;letter-spacing:.03em;
-      display:flex;justify-content:center;align-items:flex-start;
-      padding:8vh 1rem 10vh;
-      position:relative;overflow-x:hidden;
+      margin:0;
+      background: radial-gradient(1200px 700px at 50% 20%, rgba(159,209,255,0.22), transparent 55%),
+                  radial-gradient(900px 600px at 20% 80%, rgba(173,117,255,0.14), transparent 60%),
+                  linear-gradient(180deg, #0b0f1a 0%, #0b0f1a 70%, #0a0e18 100%);
+      color:var(--fg);
+      font: 16px/1.75 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "PingFang SC", "Noto Sans CJK SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      overflow-x:hidden;
     }
-    /* 底部微光（仅一层）*/
-    body::after{
-      content:"";position:fixed;left:50%;bottom:-12vh;transform:translateX(-50%);
-      width:140vmax;height:60vmax;border-radius:50%;
-      background:radial-gradient(ellipse at center, rgba(70,140,255,.28) 0%, rgba(70,140,255,.12) 40%, rgba(11,27,58,0) 70%);
-      filter: blur(18px);opacity:.9;pointer-events:none;
-      animation: glowPulse 10s ease-in-out infinite;
+
+    /* 柔光“脉动”动画，只有一层背景，不再分成三段 */
+    .glow{
+      position:fixed; inset:-10vmax;
+      pointer-events:none;
+      background:
+        radial-gradient(45vw 35vw at 60% 10%, rgba(255,255,255,0.10), transparent 60%),
+        radial-gradient(60vw 45vw at 20% 80%, rgba(159,209,255,0.08), transparent 65%);
+      filter: blur(30px);
+      animation: float 14s ease-in-out infinite alternate;
+      opacity:.9;
     }
-    @keyframes glowPulse{0%,100%{opacity:.75;filter:blur(18px)}50%{opacity:1;filter:blur(26px)}}
+    @keyframes float{
+      0%   {transform: translate3d(0,0,0) scale(1)}
+      100% {transform: translate3d(2vw,-1vh,0) scale(1.05)}
+    }
 
-    /* 渐入 */
-    @keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    main{max-width:760px;animation:fadein 1.8s ease-out forwards}
-    h1{font-size:clamp(1.6rem,2.5vw+1rem,2.4rem);margin:0 0 .5rem 0;font-weight:600;color:#fff;text-shadow:0 0 8px rgba(255,255,255,.25);opacity:0;animation:fadein 2s ease-out .2s forwards}
-    .subtitle{color:#aab2cc;font-size:.95rem;margin-bottom:2.2rem;opacity:0;animation:fadein 2s ease-out .5s forwards}
-    .poem{white-space:pre-wrap;font-size:clamp(1.05rem,1.2vw+.8rem,1.2rem);opacity:0;animation:fadein 2.5s ease-out .8s forwards}
-    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);margin:1.8rem 0;opacity:0;animation:fadein 2s ease-out 1.8s forwards}
-    footer{color:#aab2cc;font-size:.9rem;display:flex;gap:.8rem;opacity:0;animation:fadein 2s ease-out 2.2s forwards}
-    .badge{border:1px solid currentColor;border-radius:999px;padding:.2rem .6rem;opacity:.7}
-
-    /* 音乐按钮（提高层级，保证可点） */
-    .music-toggle{position:fixed; right:1rem; bottom:1rem; z-index:1000;
-      background:rgba(255,255,255,.08); color:#e9ecf5; border:1px solid rgba(255,255,255,.25);
-      backdrop-filter:blur(6px); padding:.55rem .9rem; border-radius:999px; 
-      font-size:.9rem; line-height:1; cursor:pointer; display:flex; align-items:center; gap:.45rem;
-      transition:all .25s ease; opacity:.95;}
-    .music-toggle:hover{background:rgba(255,255,255,.14)}
-    .music-toggle .dot{width:.45rem;height:.45rem;border-radius:50%;background:#22d3ee;box-shadow:0 0 10px #22d3ee}
-    .music-toggle.paused .dot{background:#94a3b8;box-shadow:none}
-
-    /* 顶部提示 */
-    .hint{position:fixed; top:1rem; left:50%; transform:translateX(-50%); z-index:1000;
-      background:rgba(255,255,255,.08); color:#e9ecf5; border:1px solid rgba(255,255,255,.2);
-      padding:.35rem .7rem; border-radius:999px; font-size:.82rem; opacity:.95; backdrop-filter:blur(6px); transition:opacity .4s ease}
-    .hint.hide{opacity:0}
-
-    audio{display:none}
+    .wrap{
+      min-height:100%;
+      display:flex; align-items:center; justify-content:center;
+      padding:10vh 5vw;
+    }
+    .card{
+      width:min(880px, 100%);
+      background: color-mix(in oklab, var(--card) 92%, transparent);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:24px;
+      box-shadow: 0 20px 80px rgba(0,0,0,.45);
+      backdrop-filter: blur(6px);
+      padding:clamp(20px, 4vw, 40px);
+    }
+    .title{
+      margin:0 0 .2em 0;
+      font-weight:700;
+      font-size:clamp(28px, 3.2vw, 40px);
+      letter-spacing:.02em;
+    }
+    .subtitle{
+      margin:.1em 0 1.2em 0;
+      color:var(--muted);
+      font-size:clamp(14px, 1.6vw, 16px);
+    }
+    .poem{
+      font-size:clamp(17px, 2vw, 19px);
+      letter-spacing:.02em;
+      word-break:break-word;
+      color:var(--fg);
+      margin:1.2em 0 0 0;
+      white-space:pre-wrap;
+    }
+    .footer{
+      margin-top:1.6em;
+      color:var(--muted);
+      font-size:14px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+    }
+    .tag{
+      padding:.2em .6em;
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:999px;
+      color:var(--accent);
+      background:rgba(159,209,255,.06);
+    }
+    a{color:var(--accent); text-decoration:none; border-bottom:1px dashed rgba(159,209,255,.4)}
+    a:hover{border-bottom-color:transparent}
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>卑微的光</h1>
-      <div class="subtitle">— 一页极简诗</div>
-    </header>
-    <section class="poem">
-风经过我，
-什么也没带走。
+  <!-- 柔光层（纯视觉），无任何音频元素 -->
+  <div class="glow" aria-hidden="true"></div>
 
-我仍在原处，
-低一点，
-再低一点，
-直到心底的光
-能照见自己。
+  <main class="wrap">
+    <article class="card" role="article" aria-label="Light of Humility">
+      <header>
+        <h1 class="title">Light of Humility</h1>
+        <p class="subtitle">FF · Light &amp; Whisper · 光之谦卑</p>
+      </header>
 
-世界太大声了，
-我不必回应。
+      <!-- 把你的诗放到下面这个 <div class="poem"> 里（支持中英文与换行） -->
+      <div class="poem">
+在最安静的角落里，光把影子抱紧，
+像是一句不言的祷告，慢慢落到心上。
 
-热闹在远处喧哗，
-像潮水
-拍着一座空城。
+我不需要更响的乐章，
+只要看见尘埃在光里沉落、起伏，
+像一次又一次温柔的鞠躬。
 
-我愿做被忽略的一片叶，
-在风里转身，
-不求方向。
+谦卑不是低到尘土，
+而是把心举到光里，
+任它看见、被看见，然后安然。
+      </div>
 
-爱你不必说出口，
-因为它早已在心里。
-
-一切高处都在坠落。
-
-不问意义，
-
-只听见——
-
-光，
-从沉默里亮起。
-    </section>
-    <div class="divider"></div>
-    <footer>
-      <span class="badge">留白</span>
-      <span class="badge">静默</span>
-      <span class="badge">微光</span>
-    </footer>
+      <section class="footer" aria-label="meta">
+        <span class="tag">#no-music</span>
+        <span class="tag">#light</span>
+        <span class="tag">#whisper</span>
+        <span>© FF · <a href="https://f2fang.github.io/FF-Light-and-Whisper/" target="_blank" rel="noopener">Project Home</a></span>
+      </section>
+    </article>
   </main>
-
-  <!-- 音乐（需用户手势触发） -->
-  <audio id="bgm" preload="auto" loop playsinline>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/14/audio_3a62161d68.mp3?filename=soft-piano-ambient-110153.mp3" type="audio/mpeg">
-  </audio>
-  <div class="hint" id="hint">点击右下角播放音乐</div>
-  <button class="music-toggle paused" id="musicBtn" aria-pressed="false" aria-label="播放或暂停音乐">
-    <span class="dot" aria-hidden="true"></span>
-    <span id="musicText">播放音乐</span>
-  </button>
-
-  <script>
-    (function(){
-      const audio = document.getElementById('bgm');
-      const btn = document.getElementById('musicBtn');
-      const txt = document.getElementById('musicText');
-      const hint = document.getElementById('hint');
-
-      function play(){
-        audio.play().then(()=>{
-          btn.classList.remove('paused');
-          btn.setAttribute('aria-pressed','true');
-          txt.textContent = '暂停音乐';
-          hint && hint.classList.add('hide');
-        }).catch(()=>{});
-      }
-
-      // 任意一次交互即尝试播放（兼容自动播放限制）
-      function firstGesture(){ play(); window.removeEventListener('pointerdown', firstGesture); window.removeEventListener('keydown', firstGesture); }
-      window.addEventListener('pointerdown', firstGesture, {once:true});
-      window.addEventListener('keydown', firstGesture, {once:true});
-
-      btn.addEventListener('click', ()=>{
-        if(audio.paused){ play(); }
-        else{ audio.pause(); btn.classList.add('paused'); btn.setAttribute('aria-pressed','false'); txt.textContent = '播放音乐'; }
-      });
-
-      // 降低动效偏好
-      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        document.body.style.setProperty('animation','none');
-      }
-
-      audio.volume = 0.5;
-    })();
-  </script>
 </body>
 </html>

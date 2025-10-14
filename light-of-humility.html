@@ -81,24 +81,34 @@
       font-size:clamp(13px, 1.3vw, 15px);
     }
 
+    /* 逐行淡入的行样式 */
     .poem{
-      white-space:pre-wrap;
       font-size:clamp(15.5px, 1.6vw, 18px);
       line-height:1.95;
       color:var(--fg);
-      opacity:0; animation: fadein 2s ease-out .5s forwards;
     }
-    @keyframes fadein{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+    .line{
+      display:block;
+      opacity:0;
+      transform:translateY(6px);
+      animation: lineFade 1s ease-out forwards;
+      will-change: transform, opacity;
+    }
+    @keyframes lineFade{
+      to{ opacity:1; transform:none; }
+    }
+    /* 空行（分段）留出更大间距，但不动画 */
+    .gap{ height:0.9rem; }
 
     .divider{
       height:1px; margin:1.6rem 0;
       background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
-      opacity:0; animation: fadein 2s ease-out 1.8s forwards;
+      opacity:0; animation: fadein 2s ease-out 2.3s forwards;
     }
     .footer{
       color:var(--muted); font-size:13.5px;
       display:flex; gap:12px; flex-wrap:wrap; align-items:center;
-      opacity:0; animation: fadein 2s ease-out 2.3s forwards;
+      opacity:0; animation: fadein 2s ease-out 2.6s forwards;
     }
     .tag{
       padding:.18em .56em;
@@ -116,9 +126,11 @@
       padding:.26rem .58rem; border-radius:999px; backdrop-filter:blur(6px);
     }
 
+    /* 减少动态：关闭所有动画，直接静态呈现 */
     @media (prefers-reduced-motion: reduce){
-      .glow, .card, .poem, .divider, .footer{ animation: none !important; }
+      .glow, .card, .line, .divider, .footer{ animation: none !important; }
       .card{ opacity:1; transform:none; }
+      .line{ opacity:1; transform:none; }
     }
   </style>
 </head>
@@ -134,7 +146,8 @@
         <p class="subtitle">— 一页极简诗</p>
       </header>
 
-      <div class="poem">
+      <!-- 诗内容：原文写在 data-poem 里，脚本会逐行渲染并设置延迟 -->
+      <section class="poem" id="poem" data-poem="
 风经过我，
 什么也没带走。
 
@@ -166,7 +179,7 @@
 
 光，
 从沉默里亮起。
-      </div>
+      "></section>
 
       <div class="divider"></div>
 
@@ -178,5 +191,37 @@
       </section>
     </article>
   </main>
+
+  <script>
+    // 将 data-poem 中的文本按行渲染为逐行淡入（带延时）
+    (function(){
+      const box = document.getElementById('poem');
+      if(!box) return;
+      const raw = (box.getAttribute('data-poem') || '').replace(/^\s+|\s+$/g,'');
+      const lines = raw.split(/\r?\n/);
+      const baseDelay = 0.45;      // 第一行延迟（秒）
+      const step = 0.18;           // 每行递增延迟（秒）
+      let index = 0;
+      const frag = document.createDocumentFragment();
+
+      lines.forEach((t)=>{
+        if(t.trim()===''){
+          const gap = document.createElement('div');
+          gap.className = 'gap';
+          frag.appendChild(gap);
+          return;
+        }
+        const span = document.createElement('span');
+        span.className = 'line';
+        span.textContent = t;
+        span.style.animationDelay = (baseDelay + step * index).toFixed(2) + 's';
+        frag.appendChild(span);
+        index++;
+      });
+
+      box.textContent = '';
+      box.appendChild(frag);
+    })();
+  </script>
 </body>
 </html>

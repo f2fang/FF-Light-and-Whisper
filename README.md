@@ -19,7 +19,7 @@ A minimalist blue night poem with ambient piano, where light grows from silence.
 Once deployed via GitHub Pages, visit:
 
 ```
-https://yourname.github.io/ff-light-and-whisper/light-of-humility.html
+https://f2fang.github.io/ff-light-and-whisper/light-of-humility.html
 ```
 
 ---

@@ -28,19 +28,6 @@ Use the **bottom-right glowing button** to play or pause the music.
 
 ---
 
-## 🌐 Deploy on GitHub Pages
-
-1. Create a new repository: `ff-light-and-whisper`
-2. Upload all `.html` files (each poem as one file)
-3. Go to **Settings → Pages**
-4. Choose **Branch: main** and **Folder: /(root)**
-5. Save and visit your page:
-
-   ```
-   https://yourname.github.io/ff-light-and-whisper/
-   ```
-
----
 
 ## 🕊️ Upcoming Works
 

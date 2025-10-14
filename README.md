@@ -15,12 +15,9 @@ A minimalist blue night poem with ambient piano, where light grows from silence.
 > “风经过我，什么也没带走。
 > 我仍在原处，低一点，再低一点，直到心底的光能照见自己。”
 
-**Live page:**
-Once deployed via GitHub Pages, visit:
 
-```
-https://f2fang.github.io/ff-light-and-whisper/light-of-humility.html
-```
+**Live page:**  
+[🌙 View “Light of Humility”](https://f2fang.github.io/ff-light-and-whisper/light-of-humility.html)
 
 ---
 

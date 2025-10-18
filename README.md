@@ -30,7 +30,7 @@ where every crack becomes a place for love to enter.
 > 只是更柔软、更安静，更真实。”
 
 **Live page:**  
-[🌾 View “光下的女孩” (Girl Under the Light)](https://f2fang.github.io/FF-Light-and-Whisper/girl-under-light.html)
+[🌾 View “光下的女孩” (Girl in Light)](https://f2fang.github.io/FF-Light-and-Whisper/girl-in-light.html)
 
 ---
 

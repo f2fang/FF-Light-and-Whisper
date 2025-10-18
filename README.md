@@ -19,6 +19,19 @@ A minimalist blue night poem with ambient piano, where light grows from silence.
 **Live page:**  
 [🌙 View “Light of Humility”](https://f2fang.github.io/FF-Light-and-Whisper/light-of-humility.html)
 
+**《光下的女孩》 — Girl Under the Light**  
+A quiet, grounded reflection of transformation — how the roughness of life is softened under divine light,  
+where every crack becomes a place for love to enter.  
+
+> “我是长在乡下的女孩，  
+> 黝黑、粗糙，皮肤被风吹裂。  
+> ……  
+> 如今我仍旧是黑黝黝的女孩，  
+> 只是更柔软、更安静，更真实。”
+
+**Live page:**  
+[🌾 View “光下的女孩” (Girl Under the Light)](https://f2fang.github.io/FF-Light-and-Whisper/girl-under-light.html)
+
 ---
 
 ## 🎵 Music Control

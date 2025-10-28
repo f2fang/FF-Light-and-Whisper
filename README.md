@@ -31,6 +31,7 @@ where every crack becomes a place for love to enter.
 
 **Live page:**  
 [🌾 View “光下的女孩” (Girl in Light)](https://f2fang.github.io/FF-Light-and-Whisper/girl-in-light.html)
+[🌾 View “佛罗伦萨乡间的美好” (Florentine countryside)](https://f2fang.github.io/FF-Light-and-Whisper/Florentinecountryside.html)
 
 ---
 
